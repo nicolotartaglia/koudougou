@@ -17,7 +17,7 @@ public final class MullerRabinPrimarityVerificator {
 	 * @return <code>true<code> si le nombre est premier <code>false<code> sinon.
 	 */
 	public static boolean isProbablePrime(BigInteger number) {
-		return isProbablePrime(number, 40);
+		return isProbablePrime(number, 400);
 	}
 
 	/**
@@ -28,10 +28,7 @@ public final class MullerRabinPrimarityVerificator {
 	 */
 	public static boolean isProbablePrime(BigInteger number, int precision) {
 
-		
 		BigInteger deux = new BigInteger("2");
-		
-
 		if (number.compareTo(BigInteger.ONE) == 0) {
 			return false;
 		}
