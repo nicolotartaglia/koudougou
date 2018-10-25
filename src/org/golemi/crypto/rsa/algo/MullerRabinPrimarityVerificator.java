@@ -19,6 +19,19 @@ public final class MullerRabinPrimarityVerificator {
 	public static boolean isProbablePrime(BigInteger number) {
 		return isProbablePrime(number, 400);
 	}
+	
+	public static BigInteger generatePremier(int t1, int t2){
+		boolean isPrime = false;
+		BigInteger value = null;
+		while(!isPrime){
+			value = new BigInteger(t2, new Random());
+			int lenght = value.bitLength();
+			if(lenght >= t1 && lenght <=t2 ){
+				isPrime = MullerRabinPrimarityVerificator.isProbablePrime(value);	
+			}
+		}
+		return value;
+	}
 
 	/**
 	 * Test si un grand nombre est premier ou pas.

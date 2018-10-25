@@ -3,6 +3,7 @@ package org.golemi.crypto.rsa.algo;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Test la classe {@link MullerRabinPrimarityVerificator}
@@ -12,10 +13,18 @@ import java.util.List;
 public final class MullerRabinPrimarityTest {
 
 	public static void main(String[] args) {
-		String[] primes = { "2", "3", "41", "48", "105", "3613", "7297", "226673591177742970257407", "2932031007403",
-	    "2266735911777429702574072" };
-	
-		
+		if(args == null || args.length < 2){
+			//testTp();
+			System.out.println("Vous devez renseigner borne min et borne max en arguments ");
+		}
+		int  t1 =  Integer.parseInt(args[0]);
+		int  t2 =  Integer.parseInt(args[1]);
+		System.out.println("Generation aleatoirs d'un nombre premier entre 2^"+t1 + "et  2^ "+t2);
+		BigInteger value = MullerRabinPrimarityVerificator.generatePremier(t1, t2);
+		System.out.println(value + " est   premier  ");
+	}
+
+	private static void testTp(){
 		List<String> values = new ArrayList<String>(10);
 		String value01 = "2";
 		values.add(value01);
@@ -49,10 +58,7 @@ public final class MullerRabinPrimarityTest {
 		
 		for (String p : values) {
 			boolean result = MullerRabinPrimarityVerificator.isProbablePrime(new BigInteger(p));
-			System.out.println(p + " est -il probablement premier ? :  " + result);
+			System.out.println(p + " est -il  premier ? :  " + result);
 		}
-		
-		
 	}
-
 }
