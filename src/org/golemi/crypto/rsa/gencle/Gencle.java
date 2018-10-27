@@ -1,37 +1,43 @@
 package org.golemi.crypto.rsa.gencle;
 
 import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import org.golemi.crypto.rsa.Constant;
-import org.golemi.crypto.rsa.algo.MullerRabinPrimarityVerificator;
 
 public class Gencle {
 	
 	
-	
-	public static void generateKey(int size) throws Exception{
-		System.out.println("# Generating RSA keys for bloc size 512 bits.");
-		BigInteger p = MullerRabinPrimarityVerificator.generatePremier(size/2, size/2+16);
-		BigInteger q = MullerRabinPrimarityVerificator.generatePremier(size/2, size/2+16);
-		BigInteger n = p.multiply(q);
+	public static List<BigInteger> generateKey(int size) throws Exception{
+		Random rand = new SecureRandom();
+		System.out.println("# Generating RSA keys for bloc size"+ size +"bits.");
+		BigInteger p = BigInteger.probablePrime(size, rand);;
+		BigInteger q = BigInteger.probablePrime(size, rand);;
+		
+		BigInteger modulus = p.multiply(q);
 		System.out.println("# p,q pair generated. public n is :");
-		System.out.println(n.toString());
+		System.out.println(modulus.toString());
 		
-		BigInteger a = MullerRabinPrimarityVerificator.generatePremier(size/2, size/2+16);
-		BigInteger b = a.modInverse(n);
-		System.out.println("# a,b pair generated. public b is:");
-		System.out.println(b.toString());
+		BigInteger pubKey = new BigInteger("65537");
+		BigInteger phi = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE)); 
+		BigInteger priKey = pubKey.modInverse(phi);
+		System.out.println("# a, b pair generated. public b is:");
+		System.out.println(priKey.toString());
 		
-		System.out.println("# check a*b=1 mod phi(n) a*b :"+ a.multiply(b));
+		System.out.println("# check a*b=1 mod phi(n), a*b :"+pubKey.multiply(priKey).modInverse(phi));
 		
-		BigInteger phi = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));   
 		
-		BigInteger clepublic  = new BigInteger("65537");    
-		BigInteger cleprivee = clepublic.modInverse(phi);
-		FileUtils.ecrireCle(Constant.DIRECTORY+Constant.NAME_PRIVATE, cleprivee.toString());
-		FileUtils.ecrireCle(Constant.DIRECTORY+Constant.NAME_PUBLIC, clepublic.toString());
-		System.out.println("# OK : paire de cle stockee dans "+(Constant.DIRECTORY+Constant.NAME_PRIVATE));
-		
+		List<BigInteger> bigs = new ArrayList<BigInteger>();
+		bigs.add(pubKey);
+		bigs.add(priKey);
+		bigs.add(modulus);
+		FileUtils.ecrireCle(Constant.NAME_PRIVATE, priKey, modulus);
+		FileUtils.ecrireCle(Constant.NAME_PUBLIC, pubKey, modulus);
+		System.out.println("# OK : paire de cle stockee dans ");
+		return bigs;
 		
 	}
 	

@@ -1,52 +1,61 @@
 package org.golemi.crypto.rsa.gencle;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Writer;
+import java.math.BigInteger;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+
+import org.golemi.crypto.rsa.Constant;
 
 public class FileUtils {
 
-	
-	public static final String lireCle(String path)throws Exception{
-		StringBuffer b = new StringBuffer();
-		BufferedReader reader = null;
-		try{
-			File file = new File(path);
-			if(!file.exists()){
-				throw new FileNotFoundException ("Le fichier suivant n'existe pas : " + file);
-			}
-			reader = new BufferedReader (new FileReader(file));
-			String line = null;
-			while((line = reader.readLine()) != null){
-				b.append(line);
-			}
-		}catch(Exception e){
-			
-		}
-		finally {
-			reader.close();
-		    }
-		if(b.length()<1){
-			throw new Exception ("Aucun cle trouve ");
-		}
-		return "null";
-	}
-	
-	public static final void ecrireCle(String path, String content) throws Exception{
-		BufferedWriter output = null;
+
+	public static final List<BigInteger> lireCle(String fileName)throws Exception{
+		List<BigInteger> files = new ArrayList<BigInteger>();
+		ObjectInputStream oin = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName)));
 		try {
-			output = new BufferedWriter(new FileWriter(path));
-	        output.write(content);
-	    }
-		catch(Exception e){
-			throw e;
+			BigInteger m = (BigInteger) oin.readObject();
+			BigInteger e = (BigInteger) oin.readObject();
+			files.add(m);
+			files.add(e);
+		} catch (Exception e) {
+			throw new RuntimeException("Spurious serialisation error", e);
+		} finally {
+			oin.close();
 		}
-	    finally {
-	      output.close();
-	    }
+		return files;
+
 	}
-		 
+
+	public static final void ecrireCle(String fileName, BigInteger privateKey, BigInteger modulus) throws Exception{
+		ObjectOutputStream oout = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName)));
+		try {
+			oout.writeObject(privateKey);
+			oout.writeObject(modulus);
+		} catch (Exception e) {
+			throw new Exception("Unexpected error", e);
+		} finally {
+			oout.close();
+		}
+	}
+
 }
