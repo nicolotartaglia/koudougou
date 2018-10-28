@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.golemi.crypto.rsa.Constant;
+import org.golemi.crypto.rsa.FileUtils;
 
 public class Gencle {
 	

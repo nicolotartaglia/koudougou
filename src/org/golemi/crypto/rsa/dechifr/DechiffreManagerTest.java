@@ -5,7 +5,7 @@ package org.golemi.crypto.rsa.dechifr;
 import java.math.BigInteger;
 import java.util.List;
 
-import org.golemi.crypto.rsa.gencle.FileUtils;
+import org.golemi.crypto.rsa.FileUtils;
 public class DechiffreManagerTest {
 
 	public static void main(String[] args) throws Exception {

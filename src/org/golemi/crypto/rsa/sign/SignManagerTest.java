@@ -3,7 +3,7 @@ package org.golemi.crypto.rsa.sign;
 import java.math.BigInteger;
 import java.util.List;
 
-import org.golemi.crypto.rsa.gencle.FileUtils;
+import org.golemi.crypto.rsa.FileUtils;
 
 public class SignManagerTest {
 

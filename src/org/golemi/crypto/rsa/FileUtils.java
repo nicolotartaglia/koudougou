@@ -1,4 +1,4 @@
-package org.golemi.crypto.rsa.gencle;
+package org.golemi.crypto.rsa;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -23,8 +23,6 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-
-import org.golemi.crypto.rsa.Constant;
 
 public class FileUtils {
 
