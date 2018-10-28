@@ -11,10 +11,10 @@ public class VerifManagerTest {
 		if(args.length < 2){
 			throw new IllegalArgumentException("Deux arguments doit etres specifie");
 		}
-		List<BigInteger> bigs = FileUtils.lireCle(args[0]);
+		List<BigInteger> bigs = FileUtils.lireCle(args[1]);
 		BigInteger pubKey = bigs.get(0);
 		BigInteger modulus = bigs.get(1);
-	    boolean result = VerifManager.verify(modulus, pubKey, args[1]);
+	    boolean result = VerifManager.verify(modulus, pubKey, args[0]);
 	    System.out.println("La signature correspond : "+ result);
 	}
 

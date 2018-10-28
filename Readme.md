@@ -14,14 +14,14 @@ Chaque fonctionnalité à été présentée en package et chaque package a éte 
 Les deux classes Constant et FileUtils sont utilisé dans toutes les packages, ils posséde des méthodes utilitaires.
 de la gestion du package.
 
-##Test de primality:
+##4.1 Test de primality:
 Le package algo correspond à la fonctionnalité de test de primarité. Il implemente l'algorithme de MulleRabin pour verifier si un nombre donné est premier ou pas.
  Pour le tester, il faut fournir a la methode main un nombre  (exemple : 512 1024).
  Celle ci va generer un nombre premier.
 
 Pour tester l'executable,  javac mullerrabin.jar 200  512
 
-##Generation de clée:
+##5.1 Generation de clée:
 
 Le package gencle est utilisée pour generer des clées de rsa. Elle fournit un executable qui prend en entrée la taille de la clé et sauvegarde la clé public sous le nom /keys/golemi.pub et la clé privée golemi.priv
 
@@ -31,7 +31,7 @@ Pour le tester, il faut fournir à la methode main la taille de la clée :
   String : le chemin complet de la clé public (ici) : golemi.pub
 
 
-##Chiffrement:
+##5.2 Chiffrement:
 
 Le package chifr fournit un executable qui prend en entrée le message de l'utilisateur et le chemin complet de la clé public et produit en sortie le message chiffré.
 
@@ -41,7 +41,7 @@ Pour le tester, il faut fournir à la methode main les arguments suivants :
   String : le chemin complet de la cle public (ici) : golemi.pub
 
 
-##Dechiffrement:
+##5.3 Dechiffrement:
 
 Le package dechifr fournit un executable qui prend en entrée le message (chiffré avec golemi.priv ) a dechiffrer et le chemin complet de la clé private et produit en sortie le message dechiffré.
 
@@ -51,7 +51,7 @@ Pour le tester, il faut fournir à la methode main les arguments suivants :
   String : le chemin complet de la cle privée (ici) : golemi.priv
 
 
-##Signature:
+##5.4 Signature:
 
 Le package sign fournit un executable qui prend en entrée le message de l'utilisateur  à signer et le chemin complet de la clé public et produit en sortie le message signée. Le message signée est sortie en format base64.
 
@@ -61,7 +61,7 @@ Pour le tester, il faut fournir à la methode main les arguments suivants :
   String : le chemin complet de la cle public (ici) : golemi.pub
 
 
-##Verification:
+##5.5 Verification:
 
 Le package verif fournit un executable qui prend en entrée le message (signée avec golemi.pub ) à verifier la signature et le chemin complet de la clé private et produit en sortie le message dechiffré.
 
