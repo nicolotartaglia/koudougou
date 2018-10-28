@@ -5,6 +5,7 @@ import java.security.KeyFactory;
 import java.security.Signature;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.RSAPrivateKeySpec;
+import java.util.Base64;
 
 public class SignManager {
 	
@@ -15,7 +16,7 @@ public class SignManager {
 	    RSAPrivateKey privKey = (RSAPrivateKey)keyMaker.generatePrivate(privKeySpec);
 	    sig.initSign(privKey);
 	    sig.update(message.toByteArray());
-	    return new String(sig.sign());
+	    return Base64.getEncoder().encodeToString(sig.sign());
 	}
 	
 

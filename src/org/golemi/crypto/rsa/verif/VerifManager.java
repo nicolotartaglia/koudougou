@@ -10,13 +10,13 @@ import java.util.Base64;
 public class VerifManager {
 	
 	
-	public static boolean verify(BigInteger modulus, BigInteger exponent, String  sigBytes)  throws Exception{
+	public static boolean verify(BigInteger modulus, BigInteger exponent, byte []  sigBytes)  throws Exception{
 	    Signature sig = Signature.getInstance("SHA1withRSA");
 	    KeyFactory keyMaker = KeyFactory.getInstance("RSA");
 	    RSAPublicKeySpec pubKeySpec = new RSAPublicKeySpec(modulus, exponent);
 	    RSAPublicKey pubKey = (RSAPublicKey)keyMaker.generatePublic(pubKeySpec);
 	    sig.initVerify(pubKey);
-	    return sig.verify(sigBytes.getBytes());
+	    return sig.verify(sigBytes);
 	}
 	
 
