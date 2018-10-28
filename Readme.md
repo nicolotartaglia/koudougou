@@ -69,12 +69,15 @@ Pour le tester, il faut fournir à la methode main les arguments suivants :
 ## 5.5 Verification:
 
 
-Le package verif fournit un executable qui prend en entrée le message (signée avec golemi.pub ) à verifier la signature et le chemin complet de la clé private et produit en sortie le message dechiffré.
+Le package verif fournit un executable qui prend en entrée le message original, le message chiffree (signée avec golemi.pub ) à verifier la signature et le chemin complet de la clé private et produit en sortie le message dechiffré.
 
 Pour le tester, il faut fournir à la methode main les arguments suivants :
 
+  String  : Le message original
   String : Le message  signé. (Le message doit etre au prealablement signée avec golemi.pub)
   String : le chemin complet de la cle privée (ici) : golemi.priv
+  
+  java -jar mon_text message_signe golemi.priv
 
 Les executables:
 

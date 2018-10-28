@@ -6,7 +6,6 @@ import java.math.BigInteger;
 import java.util.List;
 
 import org.golemi.crypto.rsa.FileUtils;
-import org.golemi.crypto.rsa.dechifr.DeChiffreManager;
 public class ChiffreManagerTest {
 
 	public static void main(String[] args) throws Exception {

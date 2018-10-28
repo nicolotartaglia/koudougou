@@ -3,7 +3,6 @@ package org.golemi.crypto.rsa.algo;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Test la classe {@link MullerRabinPrimarityVerificator}
@@ -24,7 +23,7 @@ public final class MullerRabinPrimarityTest {
 		System.out.println(value + " est   premier  ");
 	}
 
-	private static void testTp(){
+	public static void testTp(){
 		List<String> values = new ArrayList<String>(10);
 		String value01 = "2";
 		values.add(value01);

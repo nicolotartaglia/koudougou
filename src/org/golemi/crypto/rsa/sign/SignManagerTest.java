@@ -11,11 +11,10 @@ public class SignManagerTest {
 		if(args.length < 2){
 			throw new IllegalArgumentException("Deux arguments doit etres specifie");
 		}
-		BigInteger original = new BigInteger(args[0].getBytes());
 		List<BigInteger> bigs = FileUtils.lireCle(args[1]);
 		BigInteger pubKey = bigs.get(0);
 		BigInteger modulus = bigs.get(1);
-	    String result = SignManager.sign(original, modulus, pubKey);
+	    String result = SignManager.sign(args[0], modulus, pubKey);
 	    System.out.println("Le message signe en base64: "+ result);
 	}
     
